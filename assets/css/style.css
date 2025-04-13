@@ -1042,87 +1042,59 @@ main {
   #experience
 \*-----------------------------------*/
 
-.experience-posts { margin-bottom: 10px; }
+.experience {
+  margin-bottom: 35px;
+}
 
-.experience-posts-list {
+.experience-title {
+  margin-bottom: 20px;
+}
+
+.experience-list {
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
 }
 
-.experience-post-item > a {
+.experience-item {
   position: relative;
   background: var(--border-gradient-onyx);
-  height: 100%;
-  box-shadow: var(--shadow-4);
-  border-radius: 16px;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: var(--shadow-2);
   z-index: 1;
 }
 
-.experience-post-item > a::before {
+.experience-item::before {
   content: "";
   position: absolute;
   inset: 1px;
+  background: var(--bg-gradient-jet);
   border-radius: inherit;
-  background: var(--eerie-black-1);
   z-index: -1;
 }
 
-.experience-banner-box {
-  width: 100%;
-  height: 200px;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.experience-banner-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: var(--transition-1);
-}
-
-.experience-post-item > a:hover .experience-banner-box img { transform: scale(1.1); }
-
-.experience-content { padding: 15px; }
-
-.experience-meta {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 7px;
-  margin-bottom: 10px;
-}
-
-.experience-meta :is(.experience-category, time) {
-  color: var(--light-gray-70);
-  font-size: var(--fs-6);
-  font-weight: var(--fw-300);
-}
-
-.experience-meta .dot {
-  background: var(--light-gray-70);
-  width: 4px;
-  height: 4px;
-  border-radius: 4px;
+.experience-content-box {
+  text-align: center;
 }
 
 .experience-item-title {
-  margin-bottom: 10px;
-  line-height: 1.3;
-  transition: var(--transition-1);
+  margin-bottom: 7px;
 }
 
-.experience-post-item > a:hover .experience-item-title { color: var(--orange-yellow-crayola); }
-
-.experience-text {
+.experience-item-text {
   color: var(--light-gray);
   font-size: var(--fs-6);
-  font-weight: var(--fw-300);
+  font-weight: var(--fw-3);
   line-height: 1.6;
 }
 
 
+
+/* Optional: hover effect on title */
+.experience-item:hover .experience-item-title {
+  color: var(--orange-yellow-crayola);
+}
 
 
 
