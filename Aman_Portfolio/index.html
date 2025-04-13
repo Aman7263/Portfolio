@@ -7,38 +7,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>vCard - Personal Portfolio</title>
 
-  <!--
-    - favicon
-  -->
+  <!-- favicon -->
   <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
 
-  <!--
-    - custom css link
-  -->
+  <!-- custom css link -->
   <link rel="stylesheet" href="./assets/css/style.css">
 
-  <!--
-    - google font link
-  -->
+  <!-- google font link -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- For Email Send -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function () {
+      emailjs.init("FhYEqstyGvtwNTCP6"); // Replace with your public key
+    })();
+  </script>
 </head>
 
 <body>
 
-  <!--
-    - #MAIN
-  -->
-
+  <!-- #MAIN -->
   <main>
 
-    <!--
-      - #SIDEBAR
-    -->
-
+    <!-- #SIDEBAR -->
     <aside class="sidebar" data-sidebar>
-
       <div class="sidebar-info">
 
         <figure class="avatar-box">
@@ -56,17 +51,12 @@
 
           <ion-icon name="chevron-down"></ion-icon>
         </button>
-
       </div>
 
       <div class="sidebar-info_more">
-
         <div class="separator"></div>
-
         <ul class="contacts-list">
-
           <li class="contact-item">
-
             <div class="icon-box">
               <ion-icon name="mail-outline"></ion-icon>
             </div>
@@ -76,55 +66,43 @@
 
               <a href="mailto:amanaryan7263@gmail.com" class="contact-link">amanaryan7263@gmail.com</a>
             </div>
-
           </li>
 
           <li class="contact-item">
-
             <div class="icon-box">
               <ion-icon name="phone-portrait-outline"></ion-icon>
             </div>
 
             <div class="contact-info">
               <p class="contact-title">Phone</p>
-
               <a href="tel:+916204304842" class="contact-link">+91 6204304842</a>
             </div>
-
           </li>
 
           <li class="contact-item">
-
             <div class="icon-box">
               <ion-icon name="calendar-outline"></ion-icon>
             </div>
 
             <div class="contact-info">
               <p class="contact-title">Birthday</p>
-
               <time datetime="2000-02-20">Feb 20, 2000</time>
             </div>
-
           </li>
 
           <li class="contact-item">
-
             <div class="icon-box">
               <ion-icon name="location-outline"></ion-icon>
             </div>
 
             <div class="contact-info">
               <p class="contact-title">Location</p>
-
               <address>Noida Delhi India</address>
             </div>
-
           </li>
-
         </ul>
 
         <div class="separator"></div>
-
         <ul class="social-list">
 
           <li class="social-item">
@@ -146,61 +124,46 @@
           </li>
 
         </ul>
-
       </div>
-
     </aside>
 
 
 
 
 
-    <!--
-      - #main-content
-    -->
-
+    <!-- #main-content -->
     <div class="main-content">
 
-      <!--
-        - #NAVBAR
-      -->
-
+      <!-- #NAVBAR -->
       <nav class="navbar">
-
         <ul class="navbar-list">
-
+      
           <li class="navbar-item">
-            <button class="navbar-link  active" data-nav-link>About</button>
+            <button class="navbar-link active" data-nav-link="about">About</button>
           </li>
-
+      
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Experience</button>
+            <button class="navbar-link" data-nav-link="experience">Experience</button>
           </li>
-
+      
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Portfolio</button>
+            <button class="navbar-link" data-nav-link="portfolio">Portfolio</button>
           </li>
-
+      
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Resume</button>
+            <button class="navbar-link" data-nav-link="resume">Resume</button>
           </li>
-
+      
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Contact</button>
+            <button class="navbar-link" data-nav-link="contact">Contact</button>
           </li>
-
+      
         </ul>
-
       </nav>
 
 
 
-
-
-      <!--
-        - #ABOUT
-      -->
-
+      <!-- #ABOUT -->
       <article class="about  active" data-page="about">
 
         <header>
@@ -436,14 +399,7 @@
 
       </article>
 
-
-
-
-
-      <!--
-        - #RESUME
-      -->
-
+      <!-- #RESUME -->
       <article class="resume" data-page="resume">
 
         <header>
@@ -451,17 +407,11 @@
         </header>
 
         <section class="resume-viewer">
-          <embed src="assets/Aman Aryan Resume.pdf" type="application/pdf" width="100%" height="600px" />
+          <embed src="assets/Aman_Aryan.pdf" type="application/pdf" width="100%" height="600px" />
         </section>
       </article>
 
-
-
-
-
-      <!--
-        - #PORTFOLIO
-      -->
+      <!-- #PORTFOLIO -->
       <article class="portfolio" data-page="portfolio">
 
         <header>
@@ -568,15 +518,8 @@
         </section>
       
       </article>
-      
 
-
-
-
-
-      <!--
-        - #experience
-      -->
+      <!-- #experience -->
       <article class="experience-posts" data-page="experience">
 
         <header>
@@ -670,14 +613,7 @@
       </article>
       
 
-
-
-
-
-      <!--
-        - #CONTACT
-      -->
-
+      <!-- #CONTACT -->
       <article class="contact" data-page="contact">
 
         <header>
@@ -695,7 +631,7 @@
 
           <h3 class="h3 form-title">Contact Form</h3>
 
-          <form action="#" class="form" data-form>
+          <form id="contact-form" class="form" data-form>
 
             <div class="input-wrapper">
               <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
@@ -725,16 +661,43 @@
 
 
 
-  <!--
-    - custom js link
-  -->
+  <!-- custom js link -->
   <script src="./assets/js/script.js"></script>
 
-  <!--
-    - ionicon link
-  -->
+  <!-- ionicon link -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <!-- For Email Send -->
+  <script>
+    const forma = document.getElementById('contact-form');
+  
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+  
+      const formData = new FormData(forma);
+  
+      const fullName = formData.get("fullname");
+      const email = formData.get("email");
+      const message = formData.get("message");
+  
+      console.log("Data received from user:");
+      console.log("Full Name:", fullName);
+      console.log("Email:", email);
+      console.log("Message:", message);
+  
+      // Optional: send with EmailJS
+      // emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+      emailjs.sendForm('service_9paxf5j', 'template_wg79k5d', this)
+        .then(() => {
+          alert('Message sent successfully!');
+          form.reset();
+        }, (error) => {
+          console.error('FAILED...', error);
+          alert('Failed to send message. Please try again.');
+        });
+    });
+  </script>  
 
 </body>
 

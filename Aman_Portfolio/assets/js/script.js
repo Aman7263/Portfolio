@@ -113,8 +113,6 @@ for (let i = 0; i < filterBtn.length; i++) {
 
 }
 
-
-
 // contact form variables
 const form = document.querySelector("[data-form]");
 const formInputs = document.querySelectorAll("[data-form-input]");
@@ -134,26 +132,20 @@ for (let i = 0; i < formInputs.length; i++) {
   });
 }
 
-
-
 // page navigation variables
-const navigationLinks = document.querySelectorAll("[data-nav-link]");
-const pages = document.querySelectorAll("[data-page]");
+const navLinks = document.querySelectorAll("[data-nav-link]");
+  const pages = document.querySelectorAll("[data-page]");
 
-// add event to all nav link
-for (let i = 0; i < navigationLinks.length; i++) {
-  navigationLinks[i].addEventListener("click", function () {
+  navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      const targetPage = link.getAttribute("data-nav-link");
 
-    for (let i = 0; i < pages.length; i++) {
-      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
-        pages[i].classList.add("active");
-        navigationLinks[i].classList.add("active");
-        window.scrollTo(0, 0);
-      } else {
-        pages[i].classList.remove("active");
-        navigationLinks[i].classList.remove("active");
-      }
-    }
+      // Remove 'active' from all links and pages
+      navLinks.forEach(l => l.classList.remove("active"));
+      pages.forEach(p => p.classList.remove("active"));
 
+      // Add 'active' to clicked link and matching page
+      link.classList.add("active");
+      document.querySelector(`[data-page="${targetPage}"]`).classList.add("active");
+    });
   });
-}
