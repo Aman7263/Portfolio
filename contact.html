@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Aman Aryan</title>
+
+  <!-- custom css link -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <!-- google font link -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <main>
+    <section class="contact-form">
+      <h2 class="h2 article-title">Contact Me</h2>
+
+      <!-- Map -->
+      <section class="mapbox">
+        <figure>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d319040.43599128944!2d77.25056!3d28.5868032!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d28c2e8ee7c9d%3A0x4c4c99b409dbb5f!2sNew%20Delhi%2C%20Delhi%2C%20India!5e0!3m2!1sen!2sbd!4v1647608789441!5m2!1sen!2sbd"
+            width="600" height="450" loading="lazy" style="border:0;"></iframe>
+        </figure>
+      </section>
+
+      <!-- Contact Form -->
+      <form id="contact-form" class="form">
+        <div class="input-wrapper">
+          <input type="text" name="fullname" class="form-input" placeholder="Full name" required>
+          <input type="email" name="email" class="form-input" placeholder="Email address" required>
+        </div>
+        <textarea name="message" class="form-input" placeholder="Your Message" required></textarea>
+
+        <button class="form-btn" type="submit">
+          <ion-icon name="paper-plane"></ion-icon>
+          <span>Send Message</span>
+        </button>
+      </form>
+    </section>
+  </main>
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+  <!-- Ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <!-- EmailJS Script -->
+  <script>
+  emailjs.init("FhYEqstyGvtwNTCP6");
+
+  const form = document.getElementById('contact-form');
+  const submitBtn = form.querySelector('.form-btn');
+
+  // Variable to store user's location
+  let userLocation = '';
+
+  // Get current location when page loads
+  window.addEventListener('load', () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude.toFixed(6);
+          const lon = position.coords.longitude.toFixed(6);
+          userLocation = `\n\nMap_Location: https://www.google.com/maps?q=${lat},${lon}`;
+          console.log('User location captured:', userLocation);
+        },
+        (error) => {
+          console.warn('Geolocation not allowed or failed:', error);
+          userLocation = '\n\nMap_Location: Not available';
+        }
+      );
+    } else {
+      console.warn('Geolocation not supported by this browser');
+      userLocation = '\n\nMap_Location: Not supported';
+    }
+  });
+
+  // Form submission
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const formData = new FormData(form);
+    const messageWithLocation = formData.get("message") + userLocation;
+
+    const templateParams = {
+      fullname: formData.get("fullname"),
+      email: formData.get("email"),
+      message: messageWithLocation,
+      page: "Contact Page",
+      time: new Date().toLocaleString()
+    };
+
+    submitBtn.disabled = true;
+    const originalText = submitBtn.querySelector('span').textContent;
+    submitBtn.querySelector('span').textContent = "Sending...";
+
+    emailjs.send('service_9paxf5j', 'template_wg79k5d', templateParams)
+      .then(() => {
+        alert('✅ Message sent successfully!');
+        form.reset();
+      })
+      .catch((error) => {
+        console.error('FAILED...', error);
+        alert('❌ Failed to send message.');
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.querySelector('span').textContent = originalText;
+      });
+  });
+</script>
+</body>
+
+</html>

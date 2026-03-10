@@ -127,7 +127,7 @@
             <button class="navbar-link" data-nav-link="resume">Resume</button>
           </li>
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link="contact">Contact</button>
+            <a class="navbar-link" href="contact.html">Contact</a>
           </li>
         </ul>
       </nav>
@@ -298,7 +298,7 @@
         </section>
       </article>
 
-      <!-- RESUME -->
+       <!-- RESUME -->
       <article class="resume" data-page="resume">
         <header>
           <h2 class="h2 article-title">Resume</h2>
@@ -308,86 +308,15 @@
         </section>
       </article>
 
-      <!-- CONTACT -->
-      <article class="contact" data-page="contact">
-        <section class="contact-form">
-          <h3 class="h3 form-title">Contact Form</h3>
-
-          <section class="mapbox" data-mapbox>
-          <figure>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d319040.43599128944!2d77.25056!3d28.5868032!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d28c2e8ee7c9d%3A0x4c4c99b409dbb5f!2sNew%20Delhi%2C%20Delhi%2C%20India!5e0!3m2!1sen!2sbd!4v1647608789441!5m2!1sen!2sbd"
-              width="400" height="300" loading="lazy"></iframe>
-          </figure>
-        </section>
-
-          <form id="contact-form" class="form" data-form>
-            <div class="input-wrapper">
-              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
-              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
-            </div>
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
-
-            <button class="form-btn" type="submit" data-form-btn>
-              <ion-icon name="paper-plane"></ion-icon>
-              <span>Send Message</span>
-            </button>
-          </form>
-        </section>
-      </article>
-
     </div>
   </main>
 
   <!-- custom js link -->
   <script src="./assets/js/script.js"></script>
 
-  <!-- EmailJS SDK -->
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-
-<!-- Ionicons -->
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-<!-- Custom JS -->
-<script>
-  emailjs.init("FhYEqstyGvtwNTCP6");
-
-  const form = document.getElementById('contact-form');
-  const submitBtn = form.querySelector('[data-form-btn]');
-
-  form.addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    const formData = new FormData(form);
-    const templateParams = {
-      fullname: formData.get("fullname"),
-      email: formData.get("email"),
-      message: formData.get("message"),
-      page: "Portfolio",
-      time: new Date().toLocaleString()
-    };
-
-    submitBtn.disabled = true;
-    const originalText = submitBtn.querySelector('span').textContent;
-    submitBtn.querySelector('span').textContent = "Sending...";
-
-    emailjs.send('service_9paxf5j', 'template_wg79k5d', templateParams)
-      .then(() => {
-        alert('✅ Message sent successfully!');
-        form.reset();
-      })
-      .catch((error) => {
-        console.error('FAILED...', error);
-        alert('❌ Failed to send message.');
-      })
-      .finally(() => {
-        submitBtn.disabled = false;
-        submitBtn.querySelector('span').textContent = originalText;
-      });
-  });
-</script>      
+  <!-- Ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 </body>
-
 </html>
