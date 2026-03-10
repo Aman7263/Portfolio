@@ -46,78 +46,81 @@
     </section>
   </main>
 
-  <!-- EmailJS SDK -->
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-
   <!-- Ionicons -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-  <!-- EmailJS Script -->
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
   <script>
-  emailjs.init("FhYEqstyGvtwNTCP6");
-
-  const form = document.getElementById('contact-form');
-  const submitBtn = form.querySelector('.form-btn');
-
-  // Variable to store user's location
-  let userLocation = '';
-
-  // Get current location when page loads
-  window.addEventListener('load', () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const lat = position.coords.latitude.toFixed(6);
-          const lon = position.coords.longitude.toFixed(6);
-          userLocation = `\n\nMap_Location: https://www.google.com/maps?q=${lat},${lon}`;
-          console.log('User location captured:', userLocation);
-        },
-        (error) => {
-          console.warn('Geolocation not allowed or failed:', error);
-          userLocation = '\n\nMap_Location: Not available';
-        }
-      );
-    } else {
-      console.warn('Geolocation not supported by this browser');
-      userLocation = '\n\nMap_Location: Not supported';
-    }
-  });
-
-  // Form submission
-  form.addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    const formData = new FormData(form);
-    const messageWithLocation = formData.get("message") + userLocation;
-
-    const templateParams = {
-      fullname: formData.get("fullname"),
-      email: formData.get("email"),
-      message: messageWithLocation,
-      page: "Contact Page",
-      time: new Date().toLocaleString()
-    };
-
-    submitBtn.disabled = true;
-    const originalText = submitBtn.querySelector('span').textContent;
-    submitBtn.querySelector('span').textContent = "Sending...";
-
-    emailjs.send('service_9paxf5j', 'template_wg79k5d', templateParams)
-      .then(() => {
-        alert('✅ Message sent successfully!');
-        form.reset();
-      })
-      .catch((error) => {
-        console.error('FAILED...', error);
-        alert('❌ Failed to send message.');
-      })
-      .finally(() => {
-        submitBtn.disabled = false;
-        submitBtn.querySelector('span').textContent = originalText;
+    (function () {
+      emailjs.init({
+        publicKey: "FhYEqstyGvtwNTCP6",
       });
-  });
-</script>
+    })();
+
+    const form = document.getElementById('contact-form');
+    const submitBtn = form.querySelector('.form-btn');
+
+    let userLocation = '';
+
+    window.addEventListener('load', () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const lat = position.coords.latitude.toFixed(6);
+            const lon = position.coords.longitude.toFixed(6);
+            userLocation = `\n\nMap_Location: https://www.google.com/maps?q=${lat},${lon}`;
+          },
+          () => {
+            userLocation = '\n\nMap_Location: Not available';
+          }
+        );
+      }
+    });
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+
+      const formData = new FormData(form);
+      // Ensure location is always mentioned
+      let locationInfo = userLocation;
+      if (!locationInfo || locationInfo.trim() === "") {
+        locationInfo = "\n\nMap_Location: Not available (permission denied or loading)";
+      }
+
+      const messageWithLocation = formData.get("message") + locationInfo;
+
+      const templateParams = {
+        fullname: formData.get("fullname"),
+        email: formData.get("email"),
+        message: messageWithLocation,
+        page: "Portfolio -- Contact Page",
+        time: new Date().toLocaleString()
+      };
+
+      submitBtn.disabled = true;
+      const originalText = submitBtn.querySelector('span').textContent;
+      submitBtn.querySelector('span').textContent = "Sending...";
+
+      emailjs.send('service_9paxf5j', 'template_wg79k5d', templateParams)
+        .then(() => {
+          alert('✅ Message sent successfully!');
+          form.reset();
+        })
+        .catch((error) => {
+          console.error('FAILED...', error);
+          alert('❌ Failed to send message.');
+        })
+        .finally(() => {
+          submitBtn.disabled = false;
+          submitBtn.querySelector('span').textContent = originalText;
+        });
+    });
+  </script>
 </body>
 
 </html>
